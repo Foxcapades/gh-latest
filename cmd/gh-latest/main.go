@@ -9,7 +9,6 @@ import (
 	"github.com/Foxcapades/gh-latest/internal/flags"
 	"github.com/Foxcapades/gh-latest/internal/gh"
 	"github.com/sirupsen/logrus"
-	"github.com/x-cray/logrus-prefixed-formatter"
 )
 
 const version = "snapshot"
@@ -21,7 +20,6 @@ const (
 var pattern = regexp.MustCompile(`"[/\w\-.%]+/download/.+?"`)
 
 func main() {
-	logrus.SetFormatter(new(prefixed.TextFormatter))
 	log := logrus.WithFields(logrus.Fields{
 		"app":     "gh-latest",
 		"version": version,
