@@ -6,8 +6,8 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/Foxcapades/gh-download-latest/internal/flags"
-	"github.com/Foxcapades/gh-download-latest/internal/gh"
+	"github.com/Foxcapades/gh-latest/internal/flags"
+	"github.com/Foxcapades/gh-latest/internal/gh"
 	"github.com/sirupsen/logrus"
 	"github.com/x-cray/logrus-prefixed-formatter"
 )

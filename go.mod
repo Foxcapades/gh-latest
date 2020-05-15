@@ -1,4 +1,4 @@
-module github.com/Foxcapades/gh-download-latest
+module github.com/Foxcapades/gh-latest
 
 go 1.14
 

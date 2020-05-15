@@ -8,7 +8,7 @@ import (
 
 	"github.com/Foxcapades/Argonaut/v0"
 	"github.com/Foxcapades/Argonaut/v0/pkg/argo"
-	"github.com/Foxcapades/gh-download-latest/internal/config"
+	"github.com/Foxcapades/gh-latest/internal/config"
 )
 
 const (
@@ -24,7 +24,7 @@ const (
 
 	flagVerShort = 'v'
 	flagVerLong  = "version"
-	flagVerDesc  = "Prints the application version."
+	flagVerDesc  = "Prints this application's version."
 )
 
 func ParseArgs(version string, log *logrus.Entry) (out config.Options) {
