@@ -1,0 +1,42 @@
+package flags
+
+import (
+	"fmt"
+	"os"
+	"strings"
+
+	"github.com/Foxcapades/Argonaut/v0"
+	"github.com/Foxcapades/Argonaut/v0/pkg/argo"
+	"github.com/Foxcapades/gh-download-latest/internal/config"
+)
+
+const (
+	flagUrlShort = 'u'
+	flagUrlLong  = "urls-only"
+	flagUrlDesc  = "Print the output as a list of urls rather than a json " +
+		"object.\nCannot be used with -t/--tag-only"
+
+	flagTagShort = 't'
+	flagTagLong  = "tag-only"
+	flagTagDesc  = "Print only the latest release tag rather than a json object." +
+		"\nCannot be used with -u/--urls-only"
+
+	flagVerShort = 'v'
+	flagVerLong  = "version"
+	flagVerDesc  = "Prints the application version."
+)
+
+func ParseArgs(version string) (out config.Options) {
+	cli.NewCommand().
+		Flag(cli.SlFlag(flagUrlShort, flagUrlLong, flagUrlDesc).
+			Bind(&out.UrlOnly, false)).
+		Flag(cli.SlFlag(flagTagShort, flagTagLong, flagTagDesc).
+			Bind(&out.TagOnly, false)).
+		Flag(cli.SlFlag(flagVerShort, flagVerLong, flagVerDesc).
+			OnHit(func(argo.Flag) { fmt.Println(version); os.Exit(0) })).
+		Arg(cli.NewArg().Name("User/Repo").Require().Bind(&out.Slug)).
+		MustParse()
+
+	out.Slug = strings.Trim(out.Slug, "/")
+	return
+}
