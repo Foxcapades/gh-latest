@@ -22,11 +22,11 @@ go get -u github.com/Foxcapades/gh-latest/cmd/gh-latest
 ----
 $ gh-latest Foxcapades/gh-latest
 {
- "version": "v1.0.0",
+ "version": "v1.0.2",
  "files": [
-  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-darwin.v1.0.0.tar.gz",
-  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-linux.v1.0.0.tar.gz",
-  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-windows.v1.0.0.zip"
+  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-darwin.v1.0.2.tar.gz",
+  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-linux.v1.0.2.tar.gz",
+  "https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-windows.v1.0.2.zip"
  ]
 }
 ----
@@ -35,16 +35,16 @@ $ gh-latest Foxcapades/gh-latest
 [source, console]
 ----
 $ gh-latest -t Foxcapades/gh-latest
-v1.0.0
+v1.0.2
 ----
 
 .Get just the download urls
 [source, console]
 ----
 $ gh-latest -u Foxcapades/gh-latest
-https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-darwin.v1.0.0.tar.gz
-https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-linux.v1.0.0.tar.gz
-https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-windows.v1.0.0.zip
+https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-darwin.v1.0.2.tar.gz
+https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-linux.v1.0.2.tar.gz
+https://github.com/Foxcapades/gh-latest/releases/download/v1.0.2/gh-latest-windows.v1.0.2.zip
 ----
 
 .Help text
