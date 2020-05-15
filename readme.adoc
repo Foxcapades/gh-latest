@@ -4,6 +4,18 @@ A simple tool that reports the latest release of a given GitHub repository.
 
 Does not use the API to avoid rate limiting.
 
+== Download
+
+Downloads for Linux, Mac, and Windows are available from the releases page.
+
+Or using `go get`
+
+[source, console]
+----
+go get
+
+== Usage
+
 .Basic Usage
 [source, console]
 ----
