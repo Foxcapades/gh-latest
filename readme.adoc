@@ -50,7 +50,7 @@ https://github.com/Foxcapades/gh-latest/releases/download/v1.0.0/gh-latest-windo
 .Help text
 [source, console]
 ----
-gh-latest -h
+$ gh-latest -h
 Usage:
   gh-latest [OPTIONS] <User/Repo>
 
