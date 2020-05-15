@@ -1,5 +1,9 @@
 = GitHub Repo Release Lookup
 
+image:https://www.travis-ci.org/Foxcapades/gh-latest.svg?branch=master["Build Status", link="https://www.travis-ci.org/Foxcapades/gh-latest"]
+image:https://img.shields.io/github/v/release/Foxcapades/gh-latest[GitHub release (latest SemVer), link="https://github.com/Foxcapades/gh-latest/releases/latest"]
+image:https://img.shields.io/github/license/Foxcapades/gh-latest[GitHub]
+
 A simple tool that reports the latest release of a given GitHub repository.
 
 Does not use the API to avoid rate limiting.
