@@ -8,11 +8,12 @@ Does not use the API to avoid rate limiting.
 
 Downloads for Linux, Mac, and Windows are available from the releases page.
 
-Or using `go get`
+Or using `go get` to install:
 
 [source, console]
 ----
-go get
+go get -u github.com/Foxcapades/gh-latest/cmd/gh-latest
+----
 
 == Usage
 
