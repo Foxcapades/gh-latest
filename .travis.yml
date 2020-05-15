@@ -1,0 +1,24 @@
+language: go
+
+go:
+  - 1.14.x
+
+env:
+  - GO111MODULE=on
+
+script:
+  - make travis
+  - ls -l bin
+
+deploy:
+  provider: releases
+  api_key:
+    secure: GMBQD8jYvtk+M5Eenf+C1kT/vuA10qMWkLEi3MMD3yMCXcRiFCMZ7spar6Z6rbvHf1hjW9NUfjTxNoI+osaYjyXnP6iVlNwfwM/w+4PCGTkVG7w0cJ5dZ3Z8Mq/KoT1IPR63P5NasHzaNPNbrP2uiNCRmk8VgNoRwLoOAuVJyWXPsikcui4pHVzDZjcslfTNHooD7bKFGL2HH0XqPaUh78evpyjqkELlnO2xs08Sr0gBx3kwLlDouiEQ6jcSHbNgC3+3w+o1lcBsWq68wkzeND9VlH9eH7Pg1m87LpENBGND1YjejF+MYbWGCGqXNN3vXPskm1W8TwqcwjW0P3LgvsmaR5x68Q7W6zpKjMdDuxHCAnzve2XonC7WfRXosOX/oMRKbeyqu8jWdEtC09IvnJjU7Qbsx7a7dlv1/zVT0XIz2NcIp9qvpKLnEkG9LG1jLWC5ztsCu2NZzfDc3/YgshGCpjetfd2gr3WJLmLHSkXwQ68loDfLutQuS61JhMliPMTiNE3EMTM5Z9vfo1Q4eN3lB5gUUPEgq+cK125JCFF+Somt75QxK8A9qXtoQUodOEGEDOywvUzhGwAVaVY7t+D0/v62yOaePgopKrX+tPpbrGPn2Ymdy4FEeuOGuRvYxyzz7Gq0beuJsAOkMmC1BfYTyM+T8IOR248N+O+Duw8=
+  skip_cleanup: true
+  file:
+    - bin/gh-latest-darwin.${TRAVIS_TAG}.tar.gz
+    - bin/gh-latest-linux.${TRAVIS_TAG}.tar.gz
+    - bin/gh-latest-windows.${TRAVIS_TAG}.zip
+  on:
+    repo: Foxcapades/gh-latest
+    tags: true
