@@ -11,7 +11,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const version = "snapshot"
+var version = "snapshot"
 
 const (
 	ghUrl    = "https://github.com/"
