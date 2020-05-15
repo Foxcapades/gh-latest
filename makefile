@@ -1,4 +1,4 @@
-VERSION=$(shell git describe --tags 2> /dev/null || "snapshot")
+VERSION=$(shell git describe --tags 2> /dev/null || echo "snapshot")
 
 build:
 	env CGO_ENABLED=0 GOOS=linux go build -o bin/gh-latest -ldflags "-X main.version=${VERSION}" cmd/main.go

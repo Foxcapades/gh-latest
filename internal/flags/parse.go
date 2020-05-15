@@ -2,6 +2,7 @@ package flags
 
 import (
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"os"
 	"strings"
 
@@ -26,8 +27,9 @@ const (
 	flagVerDesc  = "Prints the application version."
 )
 
-func ParseArgs(version string) (out config.Options) {
-	cli.NewCommand().
+func ParseArgs(version string, log *logrus.Entry) (out config.Options) {
+
+	_, err := cli.NewCommand().
 		Flag(cli.SlFlag(flagUrlShort, flagUrlLong, flagUrlDesc).
 			Bind(&out.UrlOnly, false)).
 		Flag(cli.SlFlag(flagTagShort, flagTagLong, flagTagDesc).
@@ -35,8 +37,17 @@ func ParseArgs(version string) (out config.Options) {
 		Flag(cli.SlFlag(flagVerShort, flagVerLong, flagVerDesc).
 			OnHit(func(argo.Flag) { fmt.Println(version); os.Exit(0) })).
 		Arg(cli.NewArg().Name("User/Repo").Require().Bind(&out.Slug)).
-		MustParse()
+		Parse()
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	out.Slug = strings.Trim(out.Slug, "/")
+
+	if out.UrlOnly && out.TagOnly {
+		log.Fatal("Cannot use urls-only and tag-only modes together.")
+	}
+
 	return
 }

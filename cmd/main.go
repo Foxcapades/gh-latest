@@ -3,58 +3,42 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Foxcapades/Go-Chainrequest/simple"
-	"github.com/Foxcapades/gh-download-latest/internal/flags"
-	"net/http"
 	"os"
-	"path"
 	"regexp"
+
+	"github.com/Foxcapades/gh-download-latest/internal/flags"
+	"github.com/Foxcapades/gh-download-latest/internal/gh"
+	"github.com/sirupsen/logrus"
+	"github.com/x-cray/logrus-prefixed-formatter"
 )
 
 const version = "snapshot"
 
 const (
 	ghUrl    = "https://github.com/"
-	ghLatest = "/releases/latest"
 )
 
 var pattern = regexp.MustCompile(`"[/\w\-.%]+/download/.+?"`)
 
 func main() {
-	opts := flags.ParseArgs(version)
-
-	if opts.UrlOnly && opts.TagOnly {
-		panic("Cannot use urls-only and tag-only modes together.")
-	}
-
-	res := simple.GetRequest(fmt.Sprintf("%s%s%s", ghUrl, opts.Slug, ghLatest)).
-		DisableRedirects().
-		Submit()
-
-	if res.MustGetResponseCode() != http.StatusFound {
-		panic(fmt.Sprintf("Unexpected HTTP status code.  Expected %d, got %d",
-			http.StatusFound, res.MustGetResponseCode()))
-	}
+	logrus.SetFormatter(new(prefixed.TextFormatter))
+	log := logrus.WithFields(logrus.Fields{
+		"app":     "gh-latest",
+		"version": version,
+	})
+	opts := flags.ParseArgs(version, log)
 
 	out := new(result)
-	if url, ok := res.MustLookupHeader("Location"); !ok {
-		panic("Response missing Location header")
-	} else {
-		out.Version = path.Base(url)
-		if opts.TagOnly {
-			fmt.Println(out.Version)
-			os.Exit(0)
-		}
+	url := ""
+	out.Version, url = gh.GetReleasePath(opts.Slug, log)
 
-		res = simple.GetRequest(url).Submit()
+	if opts.TagOnly {
+		fmt.Println(out.Version)
+		return
 	}
 
-	if res.MustGetResponseCode() != http.StatusOK {
-		panic(fmt.Sprintf("Unexpected HTTP status code.  Expected %d, got %d",
-			http.StatusOK, res.MustGetResponseCode()))
-	}
+	body := gh.GetReleasePage(url, log)
 
-	body := string(res.MustGetBody())
 	for _, match := range pattern.FindAllStringIndex(body, -1) {
 		subPath := body[match[0]+2 : match[1]-1]
 		out.Files = append(out.Files, ghUrl+subPath)
@@ -64,6 +48,7 @@ func main() {
 		for _, url := range out.Files {
 			fmt.Println(url)
 		}
+		return
 	}
 
 	enc := json.NewEncoder(os.Stdout)
